@@ -5,21 +5,26 @@ class SignUp extends Component {
         super(props);
         this.state = {
             email: "",
+            password: "",
+            repeat: "",
+            name: "",
+            lastname: ""
         }
         this.updateEmailField = this.updateEmailField.bind(this);
     }
 
     updateEmailField = (e) => {
         this.setState({
-            email: e.target.value,
+            [e.target.name]: e.target.value,
         });
+        console.log(e.target.value) 
     }
 
     render() {
         return (
             <div>
                 <h1>
-                    Email: {this.state.email}
+                    {JSON.stringify(this.state,1,1)}
                 </h1>
                 <form onSubmit={this.handleSubmit}>
                     <div>
@@ -28,21 +33,35 @@ class SignUp extends Component {
                         </label>
                         <input type="email" name="email" value={this.state.email} onChange={this.updateEmailField}></input>
                     </div>
+                    <div>
+                        <label>
+                            Password:
+                        </label>
+                        <input type="text" name="password" value={this.state.password} onChange={this.updateEmailField}></input>
+                    </div>
+                    <div>
+                        <label>
+                            Repeat Password:
+                        </label>
+                        <input type="text" name="repeat" value={this.state.repeat} onChange={this.updateEmailField}></input>
+                    </div>
+                    <div>
+                        <label>
+                            Name:
+                        </label>
+                        <input type="text" name="name" value={this.state.name} onChange={this.updateEmailField} ></input>
+                    </div>
+                    <div>
+                        <label>
+                            Last Name:
+                        </label>
+                        <input type="text" name="lastname" value={this.state.lastname} onChange={this.updateEmailField} ></input>
+                    </div>
                     <input type="submit" value="Submit" />
                 </form>
             </div>
         );
     }
 }
-
-// - Calling SignUp component on App.js - DONE
-// - Display input field - DONE
-// - Display an email address inside H1 - DONE
-// - On change for edits on the field - DONE
-// - Assign function updateEmailField - DONE
-// - bind(this) - DONE
-// - updateEmailField(event) -> e.target.value - DONE
-// - Function returns an e-mail - DONE
-// - Apend e-mail to <h1> - DONE
 
 export default SignUp;
