@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const app = express();
 
-const authRouter = require('./routes/auth/auth');
+const authRouter = require('./back/routes/auth/auth.js');
 
 
 // set up the application
