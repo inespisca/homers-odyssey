@@ -8,16 +8,32 @@ class SignUp extends Component {
             password: "",
             repeat: "",
             name: "",
-            lastname: ""
+            lastname: "",
+            flash: "",
         }
-        this.updateEmailField = this.updateEmailField.bind(this);
     }
 
     updateEmailField = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
         });
-        console.log(e.target.value) 
+    }
+    
+    handleSubmit = (e) => {
+        fetch("/auth/signup",
+        {
+            method: 'POST',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(this.state),
+        })
+        .then(res => res.json())
+        .then(
+            res => this.setState({"flash": res.flash}),
+            err => this.setState({"flash": err.flash})
+        )
+    e.preventDefault();
     }
 
     render() {
