@@ -1,13 +1,17 @@
 const express = require('express');
-const connection = require('./../../helpers/db');
 const router = express.Router();
+const connection = require('../../helpers/db.js');
 
 router.post('/signup', function (req, res, next) {
-    const query = connection.query('INSERT INTO users (email, password, name, lastname) VALUES (?,?,?,?)', [req.body.email, req.body.password, req.body.name, req.body.lastname], function (err, results, fields) {
-        if(error) res.status(500).end();
-        res.send('Welcome!');
-        res.end();
-    })
-})
+    const q = 'INSERT INTO users (email, password, name, lastname) VALUES (?,?,?,?)';
+    const data = req.body
+    connection.query[q, data.email, data.password, data.name, data.lastname],
+        (error, results, fields) => {
+        if (error)
+            res.status(500).json({ flash: error.message });
+        else
+            res.status(200).json({ flash: "User has been signed up!" });
+        };
+});
 
-module.exports = router; 
+module.exports = router;
